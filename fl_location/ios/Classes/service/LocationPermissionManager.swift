@@ -32,7 +32,8 @@ class LocationPermissionManager: NSObject, CLLocationManagerDelegate {
     self.handler = handler
     
     if containsLocationAlwaysUsageDescription() {
-      locationManager.requestAlwaysAuthorization()
+      handler.onPermissionError(errorCode: ErrorCodes.LOCATION_USAGE_DESCRIPTION_NOT_FOUND)
+      disposeResources()
     } else if containsLocationWhenInUseUsageDescription() {
       locationManager.requestWhenInUseAuthorization()
     } else {
